@@ -43,13 +43,13 @@ class OrderBook {
         }
     }
 
-    addOrder(type, ticker, quantity, price) {
-        const newOrder = new Order(type, ticker, quantity, price);
+    addOrder(orderType, tickerSymbol, quantity, price) {
+        const newOrder = new Order(orderType, tickerSymbol, quantity, price);
 
-        if (type === "Buy") {
-            this.insertSorted(this.buyHead, newOrder, (a, b) => b.price - a.price);
+        if (orderType === "Buy") {
+            this.insertSorted(this.buyHead, newOrder, (o1, o2) => o2.price - o1.price);
         } else {
-            this.insertSorted(this.sellHead, newOrder, (a, b) => a.price - b.price);
+            this.insertSorted(this.sellHead, newOrder, (o1, o2) => o1.price - o2.price);
         }
 
         this.matchOrders();
